@@ -78,6 +78,10 @@ Callaway, B. and P. H. C. Sant'Anna (2021), “Difference-in-Differences with
 Multiple Time Periods,” *Journal of Econometrics*, 225(2), 200–230.
 <https://doi.org/10.1016/j.jeconom.2020.12.001>.
 
+Karim, S. R., M. Ø. Nielsen, J. G. MacKinnon, and M. D. Webb (2026),
+“Improved Inference for CSDID Using the Cluster Jackknife,” arXiv:2602.12043.
+<https://arxiv.org/abs/2602.12043>.
+
 Sant'Anna, P. H. C. and J. Zhao (2020), “Doubly Robust Difference-in-Differences
 Estimators,” *Journal of Econometrics*, 219(1), 101–122.
 <https://doi.org/10.1016/j.jeconom.2020.06.003>.
