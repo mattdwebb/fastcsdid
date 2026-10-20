@@ -7,9 +7,12 @@ test_that("complete-support covariance variants agree and are PSD", {
   full <- c(1, 2, -1)
   covariance <- jackknife_covariance(deleted, full)
   expect_equal(covariance$cv3, covariance$common_cv3, tolerance = 0)
-  expect_equal(covariance$cv3, covariance$pairwise_cv3, tolerance = 0)
+  # BLAS crossprod and scalar sum use different accumulation orders on some
+  # platforms. Test agreement at double precision rather than bit identity.
+  roundoff <- 64 * .Machine$double.eps
+  expect_equal(covariance$cv3, covariance$pairwise_cv3, tolerance = roundoff)
   expect_equal(covariance$cv3j, covariance$common_cv3j, tolerance = 0)
-  expect_equal(covariance$cv3j, covariance$pairwise_cv3j, tolerance = 0)
+  expect_equal(covariance$cv3j, covariance$pairwise_cv3j, tolerance = roundoff)
   expect_true(all(covariance$n_valid_cov == 5L))
   expect_true(all(covariance$valid_deletions))
   expect_true(all(covariance$positive_semidefinite))
