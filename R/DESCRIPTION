@@ -1,0 +1,31 @@
+Package: fastrcsdid
+Type: Package
+Title: Fast CSDID for Repeated Cross Sections
+Version: 1.0.0
+Authors@R: person("Matthew", "Webb", role = c("aut", "cre"), email = "matt.webb@carleton.ca")
+Description: A transparent reference implementation of group-time
+    difference-in-differences for repeated cross sections. The package provides
+    validated no-covariate, outcome-regression, inverse-probability-weighted,
+    and locally efficient doubly robust estimators, common aggregations,
+    observation and cluster-summed influence functions, analytical cluster
+    covariance, complete delete-one-region effect matrices, cluster jackknife
+    diagnostics. Linear nuisance deletion is exact.
+    Nonlinear propensity deletion can use a fast
+    deleted-Jacobian linearization, sparse exact refits, or both. Independent
+    and external equivalence checks accompany every point-estimation and
+    influence-function path.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends:
+    R (>= 4.1.0)
+Suggests:
+    did (>= 2.5.1),
+    knitr,
+    peakRAM,
+    rmarkdown,
+    testthat (>= 3.0.0)
+LazyData: true
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0
+URL: https://github.com/mattdwebb/fastcsdid
+BugReports: https://github.com/mattdwebb/fastcsdid/issues

@@ -1,0 +1,3 @@
+# Source hashes use the same LF bytes on every platform.
+* text=auto eol=lf
+*.rda binary

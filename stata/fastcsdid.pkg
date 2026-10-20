@@ -1,0 +1,6 @@
+v 3
+d fastcsdid: repeated-cross-section group-time difference-in-differences
+d Version 1.0.0; Matthew D. Webb; MIT license
+d Requires Stata 16 or newer
+f fastcsdid.ado
+f fastcsdid.sthlp

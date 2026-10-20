@@ -1,0 +1,13 @@
+{
+  "cpu": {
+    "Name": "11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz",
+    "NumberOfCores": 8,
+    "NumberOfLogicalProcessors": 16
+  },
+  "memory": {
+    "TotalPhysicalMemory": 68376023040
+  },
+  "stata": "StataNow/SE 18.5, Windows x64, revision 26 Feb 2025",
+  "R": "4.5.3",
+  "measured_date": "2026-10-20"
+}

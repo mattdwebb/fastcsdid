@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastcsdidpy"
+version = "1.0.0"
+description = "Native repeated-cross-section group-time DiD reference implementation"
+readme = "README.md"
+authors = [{name = "Matthew D. Webb"}]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "pandas>=2.0"]
+license = "MIT"
+license-files = ["LICENSE"]
+
+[tool.setuptools.packages.find]
+include = ["fastcsdidpy*"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.urls]
+Repository = "https://github.com/mattdwebb/fastcsdid"

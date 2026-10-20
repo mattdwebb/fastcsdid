@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+*.Rcheck/
+*.tar.gz
+.Rhistory
+.RData
+*.log
+*.smcl
+stata/validation/actual*
+stata/validation/components*
+benchmarks/work/
