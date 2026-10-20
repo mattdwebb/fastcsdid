@@ -14,7 +14,9 @@ development repositories rather than regenerated against the edited code.
 | Stata removed-options and support-policy tests | Passed |
 | Stata MERIT changing-support example | Passed; 51 deletions |
 | Python built-wheel import and native/jackknife fit | Passed |
+| Stata installation from the public GitHub URL into an isolated ado directory | Passed |
 | Runtime/API source audit for removed v2 features | Passed |
+| Matched native-inference timing run | 192 calls; maximum ATT gap 8.19e-11; maximum SE gap 4.52e-12 |
 
 The R suite includes independent equivalence checks against installed
 `did`/`DRDID`, ordinary exact/linearized jackknife tests, influence functions,

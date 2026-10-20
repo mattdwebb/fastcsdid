@@ -9,6 +9,7 @@ From this directory:
 
 ```stata
 adopath ++ "."
+set type double
 import delimited using "validation/frozen/fixture.csv", clear
 fastcsdid y, time(time) gvar(g) cluster(cluster) covariates(x z) ///
     weights(w) method(dr) control(never) jackknife
