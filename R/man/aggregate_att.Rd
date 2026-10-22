@@ -21,7 +21,7 @@ aggregate_att(
 \item{types}{Requested aggregation types.}
 }
 \value{
-A list with estimates, a sparse-in-spirit weight matrix, and metadata.
+A list with estimates, an aggregation weight matrix, and metadata.
 }
 \description{
 Computes simple, cohort, calendar-time, and event-time summaries. Cell weights

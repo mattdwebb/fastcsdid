@@ -4,8 +4,7 @@
 #' the base period and includes every observed post-treatment period.
 #'
 #' @param moments A `fastrcsdid_moments` object.
-#' @param anticipation Nonnegative anticipation length. The initial prototype
-#'   currently supports zero only.
+#' @param anticipation Anticipation length. Only zero is supported.
 #' @return A data frame with one row per valid group-time effect.
 #' @export
 compile_att_map <- function(moments, anticipation = 0L) {
@@ -14,7 +13,7 @@ compile_att_map <- function(moments, anticipation = 0L) {
   }
   anticipation <- as.integer(anticipation)
   if (length(anticipation) != 1L || is.na(anticipation) || anticipation != 0L) {
-    stop("The reference implementation currently supports anticipation = 0 only.", call. = FALSE)
+    stop("Only anticipation = 0 is supported.", call. = FALSE)
   }
 
   treated <- sort(unique(moments$assignment[is.finite(moments$assignment)]))

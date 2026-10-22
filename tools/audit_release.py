@@ -1,4 +1,4 @@
-"""Check the v1 source and distribution surface before packaging or publishing."""
+"""Check that distributed source exposes only the supported inference API."""
 from pathlib import Path
 import re
 
@@ -20,7 +20,7 @@ for forbidden in ("R/R/ri.R", "R/R/ri-evaluate.R", "R/R/ri-subtract.R",
                   "R/R/ri-covariate.R", "stata/fastcsdid_assignments.ado",
                   "stata/fastcsdid_assignments.sthlp"):
     if (root / forbidden).exists():
-        failures.append("Removed source remains: " + forbidden)
+        failures.append("Unsupported inference source: " + forbidden)
 if failures:
     raise SystemExit("\n".join(failures))
-print(f"PASS: {len(files)} runtime/API files contain no removed v2 implementations or options.")
+print(f"PASS: {len(files)} runtime/API files conform to the supported inference API.")

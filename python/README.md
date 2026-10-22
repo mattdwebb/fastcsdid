@@ -39,5 +39,5 @@ observation/cluster influence functions, diagnostics, and optional jackknife
 results. `influence_function(result)` and `rif(result)` expose influence arrays.
 Invalid identification retains explicit failure status and NaN uncertainty.
 
-The frozen R/DRDID fixtures retain their original generating version metadata;
-they were not regenerated to make the v1 implementation pass.
+The frozen R/DRDID reference outputs include their generating software versions
+in [versions.txt](validation/frozen/versions.txt).

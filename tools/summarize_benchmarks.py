@@ -51,7 +51,7 @@ for (n, method), group in summary.groupby(["n", "method"], sort=False):
     report.append(f"| {n:,} | {method} | " + " | ".join(f"{values[e]:.4f}" for e in ("csdid_stata", "fast_stata", "fast_R", "fast_python")) + " |")
 report += ["", f"Across all {len(joined)} calls, maximum absolute ATT gap: {joined.estimate_gap.max():.3g}; "
            f"maximum analytical SE gap: {joined.native_se_gap.max():.3g}.",
-           "", "See ../README.md for scope, comparator revision, reproduction, and timing limitations.",
+           "", "See the [benchmark guide](../README.md) for scope, comparator revision, reproduction, and timing limitations.",
            "These timings compare analytical-inference workflows. They do not compare cluster-jackknife runtimes."]
 (out / "TIMINGS.md").write_text("\n".join(report) + "\n")
 print("\n".join(report))

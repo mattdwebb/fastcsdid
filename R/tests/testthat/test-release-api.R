@@ -1,4 +1,4 @@
-test_that("v1 exposes only retained inference methods", {
+test_that("the API accepts only supported inference methods and arguments", {
   d <- fastrcsdid_example
   for (method in c("ri", "both", "rijack", "randjack")) {
     expect_error(fast_csdid(d, "y", "time", "cohort", "region",

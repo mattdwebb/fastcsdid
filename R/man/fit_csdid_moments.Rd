@@ -32,7 +32,7 @@ start or a conventional zero start. Exact child logits converge fully.}
 \item{jackknife_method}{Nonlinear propensity deletion method. `"linearized"`
 uses a deleted-information Newton step and first-order propensity effect;
 `"refit"` converges every affected deleted logit; `"both"` retains both
-paths for direct comparison. Linear estimators always continue to use exact
+paths for direct comparison. Linear estimators use exact
 deletion.}
 
 \item{jackknife_support}{`"changing"` (default) recomputes cohort masses and
@@ -45,6 +45,6 @@ undefined aggregates still fail and are never silently dropped.}
 An object of class `fastcsdid`.
 }
 \description{
-This is the main simulation-facing entry point. It avoids revisiting
-individual observations when region-period moments have already been built.
+Uses pre-computed region-period moments to avoid revisiting individual
+observations.
 }

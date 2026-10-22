@@ -1,11 +1,12 @@
 # Stata: fastcsdid 1.0.0
 
-When upgrading a package-managed development installation, first run
-`ado uninstall fastcsdid` so obsolete helper files are removed, then install
-the new package using the URL in the repository README. If you previously used
-`adopath` with a development checkout, switch that path to this directory.
+Install from GitHub:
 
-From this directory:
+```stata
+net install fastcsdid, from("https://raw.githubusercontent.com/mattdwebb/fastcsdid/main/stata") replace
+```
+
+Run the example from this directory:
 
 ```stata
 adopath ++ "."

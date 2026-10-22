@@ -1,4 +1,4 @@
-name: Validate public source
+name: Tests
 on:
   push:
   pull_request:
@@ -30,7 +30,7 @@ jobs:
         with:
           working-directory: R
           extra-packages: any::pkgload
-      - name: Test retained estimators and API
+      - name: Test estimators and API
         shell: Rscript {0}
         run: |
           pkgload::load_all("R")

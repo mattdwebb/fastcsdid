@@ -1,4 +1,4 @@
-"""Development-only comparison of actual Stata batch output to frozen R."""
+"""Compare Stata batch output against frozen R reference results."""
 from pathlib import Path
 import json
 import numpy as np

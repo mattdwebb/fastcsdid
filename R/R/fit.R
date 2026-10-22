@@ -1,7 +1,7 @@
 #' Fit the estimator from pre-collapsed moments
 #'
-#' This is the main simulation-facing entry point. It avoids revisiting
-#' individual observations when region-period moments have already been built.
+#' Uses pre-computed region-period moments to avoid revisiting individual
+#' observations.
 #'
 #' @param moments An object returned by [collapse_rcs()].
 #' @param control_group `"never"` or `"not_yet"`.
@@ -13,7 +13,7 @@
 #' @param jackknife_method Nonlinear propensity deletion method. `"linearized"`
 #'   uses a deleted-information Newton step and first-order propensity effect;
 #'   `"refit"` converges every affected deleted logit; `"both"` retains both
-#'   paths for direct comparison. Linear estimators always continue to use exact
+#'   paths for direct comparison. Linear estimators use exact
 #'   deletion.
 #' @param jackknife_support `"changing"` (default) recomputes cohort masses and
 #'   aggregation after each deletion, allowing zero-mass cohorts to disappear.
@@ -252,7 +252,7 @@ fit_csdid_moments <- function(moments,
 #' @param inference `"none"` or `"jackknife"`.
 #' @param xformla Optional one-sided covariate formula used by covariate-based
 #'   estimators.
-#' @param est_method `"none"` preserves the validated no-covariate estimator;
+#' @param est_method `"none"` estimates effects without covariate adjustment;
 #'   `"reg"`, `"ipw"`, and `"dr"` use the corresponding repeated-CS estimator.
 #' @param ps_fit,jackknife_method,jackknife_support See [fit_csdid_moments()].
 #' @return An object of class `fastcsdid`.
@@ -288,7 +288,7 @@ fit_csdid_moments <- function(moments,
 #'   est_method = "dr", control_group = "never",
 #'   inference = "jackknife", jackknife_method = "linearized"
 #' )
-#' # Slower validation/sensitivity path:
+#' # Use exact refits for nonlinear jackknife inference:
 #' fit_dr_exact <- update(fit_dr, jackknife_method = "refit")
 #' }
 #' @export

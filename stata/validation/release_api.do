@@ -7,9 +7,6 @@ foreach opt in rijack assignments(B) strata(cluster) {
     capture fastcsdid y, time(time) gvar(g) cluster(cluster) `opt'
     assert _rc == 198
 }
-capture which fastcsdid_assignments
-* Check removal from this distribution via the repository source audit;
-* another installed package may still have the old helper on adopath.
 fastcsdid y, time(time) gvar(g) cluster(cluster) method(none) jackknife
 assert e(jk_se) > 0 & e(jk_se) < .
 preserve

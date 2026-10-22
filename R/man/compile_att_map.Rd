@@ -9,8 +9,7 @@ compile_att_map(moments, anticipation = 0L)
 \arguments{
 \item{moments}{A `fastrcsdid_moments` object.}
 
-\item{anticipation}{Nonnegative anticipation length. The initial prototype
-currently supports zero only.}
+\item{anticipation}{Anticipation length. Only zero is supported.}
 }
 \value{
 A data frame with one row per valid group-time effect.

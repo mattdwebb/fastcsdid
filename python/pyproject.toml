@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "fastcsdidpy"
 version = "1.0.0"
-description = "Native repeated-cross-section group-time DiD reference implementation"
+description = "Group-time difference-in-differences for stationary repeated cross sections"
 readme = "README.md"
 authors = [{name = "Matthew D. Webb"}]
 requires-python = ">=3.10"

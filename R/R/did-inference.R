@@ -1,4 +1,4 @@
-# No-covariate cross-package adapter. Existing RA/IPW/DR APIs are unchanged.
+# No-covariate inference adapter using cached repeated-cross-section moments.
 .did_abort <- function(reason, detail="") {
   stop(structure(list(message=paste(reason,detail),call=NULL,reason=reason),class=c("did_inference_error","error","condition")))
 }

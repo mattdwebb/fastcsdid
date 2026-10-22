@@ -40,7 +40,7 @@ fast_csdid(
 \item{xformla}{Optional one-sided covariate formula used by covariate-based
 estimators.}
 
-\item{est_method}{`"none"` preserves the validated no-covariate estimator;
+\item{est_method}{`"none"` estimates effects without covariate adjustment;
 `"reg"`, `"ipw"`, and `"dr"` use the corresponding repeated-CS estimator.}
 
 \item{ps_fit, jackknife_method, jackknife_support}{See [fit_csdid_moments()].}
@@ -83,7 +83,7 @@ fit_dr <- fast_csdid(
   est_method = "dr", control_group = "never",
   inference = "jackknife", jackknife_method = "linearized"
 )
-# Slower validation/sensitivity path:
+# Use exact refits for nonlinear jackknife inference:
 fit_dr_exact <- update(fit_dr, jackknife_method = "refit")
 }
 }

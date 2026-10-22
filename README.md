@@ -12,8 +12,8 @@ delete-one-cluster jackknife inference.
 | R | [R](R) | `fastrcsdid` | R 4.1+ |
 | Python | [python](python) | `fastcsdidpy` | Python 3.10+, NumPy, pandas |
 
-The existing language package names are retained for compatibility. There is one
-Git repository and one release version. Each implementation runs independently.
+Each implementation runs independently; install the package for your preferred
+language.
 
 ## Install
 
@@ -42,22 +42,17 @@ Never-treated and not-yet-treated control groups are supported. The common
 outputs are post-treatment ATT(g,t) and simple, cohort, calendar, and event-time
 aggregations.
 
-Analytical standard errors use cluster-summed influence functions. The ordinary
-cluster jackknife remains available. Stata and Python completely refit each
+Analytical standard errors use cluster-summed influence functions. The cluster
+jackknife deletes one cluster at a time. Stata and Python completely refit each
 deletion. R uses exact moment updates for linear estimators and offers both
-linearized and exact-refit nonlinear jackknife paths; choose `jackknife_method =
-"refit"` for an exact cross-language comparison.
-
-**Randomization inference and RI-jackknife are absent from v1 source and APIs.**
-Their options, generators, exports, and implementation code have been removed;
-old calls fail rather than silently selecting another inference method. They
-are planned for version 2. This does not remove ordinary cluster jackknife.
+linearized and exact-refit nonlinear jackknife paths; choose
+`jackknife_method = "refit"` for an exact cross-language comparison.
 
 These implementations are RCS estimators. They do not implement panel-specific
 equations, pre-treatment event-study estimation, anticipation, or all features
-of the official `csdid`/`did` packages. The Python and Stata implementations
-remain straightforward reference ports; the name does not guarantee a speed
-advantage on every problem.
+of the official `csdid`/`did` packages. See the
+[timing results](benchmarks/results/TIMINGS.md) for performance across languages,
+methods, and sample sizes.
 
 ## Examples and validation
 

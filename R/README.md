@@ -23,8 +23,7 @@ point estimates and analytical cluster influence covariance;
 
 For regression and no-covariate models, deletion is exact. Nonlinear models
 default to `jackknife_method="linearized"`; `"refit"` computes exact refits and
-`"both"` retains both **jackknife algorithms**. The separate `inference="both"`
-option from development versions is no longer supported.
+`"both"` returns the results of both jackknife algorithms.
 
 `jackknife_support="changing"` recomputes weights and permits zero-mass cohorts
 to disappear if the aggregate remains identified. `"fixed"` additionally

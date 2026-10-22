@@ -1,12 +1,13 @@
-# Timing fastcsdid against the new Stata csdid
+# Timing fastcsdid against Stata csdid 2.0.0
 
 The comparator is **csdid 2.0.0**, distributed 2026-09-27, from
 <https://github.com/pedrohcgs/csdid-stata>, pinned at
 `31a577382d7c09757ed3baa095659f45cc63c107`.
-It is loaded from an isolated checkout; installed ado packages are untouched.
-It is not the older SSC csdid or archived csdid2.
+The benchmark loads this version from a separate checkout.
 
 Read [results/TIMINGS.md](results/TIMINGS.md) for measured results.
+These results were measured with fastcsdid v1.0.0; `results/config.json`
+records the SHA-256 hashes of the source files used.
 
 ## Matched workload
 
@@ -63,5 +64,6 @@ The supplied Stata executable must accept batch arguments `/e do` (the measured
 run uses Windows Stata SE). Adapt the launcher for a non-Windows Stata binary.
 No global Stata installation changes are needed. Completed workload checkpoints
 are reused only with the same source hashes and configuration. Change `--work`
-for a fresh timing run. The synthetic data and private raw Stata logs are ignored
-by Git; public results include timings, hashes, and sanitized machine metadata.
+for a fresh timing run. Generated data and raw Stata logs are excluded from
+version control; published results include timings, source/data hashes, and
+machine specifications.

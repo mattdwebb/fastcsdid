@@ -3,17 +3,15 @@ Type: Package
 Title: Fast CSDID for Repeated Cross Sections
 Version: 1.0.0
 Authors@R: person("Matthew", "Webb", role = c("aut", "cre"), email = "matt.webb@carleton.ca")
-Description: A transparent reference implementation of group-time
-    difference-in-differences for repeated cross sections. The package provides
-    validated no-covariate, outcome-regression, inverse-probability-weighted,
-    and locally efficient doubly robust estimators, common aggregations,
+Description: Group-time difference-in-differences for stationary repeated
+    cross sections. Provides no-covariate, outcome-regression,
+    inverse-probability-weighted, and locally efficient doubly robust estimators,
+    common aggregations,
     observation and cluster-summed influence functions, analytical cluster
-    covariance, complete delete-one-region effect matrices, cluster jackknife
+    covariance, complete delete-one-region effect matrices, and cluster jackknife
     diagnostics. Linear nuisance deletion is exact.
     Nonlinear propensity deletion can use a fast
-    deleted-Jacobian linearization, sparse exact refits, or both. Independent
-    and external equivalence checks accompany every point-estimation and
-    influence-function path.
+    deleted-Jacobian linearization, sparse exact refits, or both.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends:

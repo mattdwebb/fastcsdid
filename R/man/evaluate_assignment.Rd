@@ -23,7 +23,7 @@ never treated. Defaults to the observed assignment.}
 \item{control_group}{Either `"never"` or `"not_yet"`.}
 
 \item{active}{Optional logical vector indicating regions retained in the
-sample. This is primarily a transparent brute-force validation hook.}
+sample. Set an entry to `FALSE` to exclude that region.}
 }
 \value{
 A list containing the ATT vector, support diagnostics, and cohort sizes.

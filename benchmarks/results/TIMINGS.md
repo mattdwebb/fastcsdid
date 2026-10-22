@@ -20,5 +20,5 @@ All times are seconds. CSV files retain individual runs and unrounded values.
 
 Across all 192 calls, maximum absolute ATT gap: 8.19e-11; maximum analytical SE gap: 4.52e-12.
 
-See ../README.md for scope, comparator revision, reproduction, and timing limitations.
+See the [benchmark guide](../README.md) for scope, comparator revision, reproduction, and timing limitations.
 These timings compare analytical-inference workflows. They do not compare cluster-jackknife runtimes.

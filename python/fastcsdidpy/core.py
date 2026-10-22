@@ -104,7 +104,7 @@ def _cell(y, P, D, X, w, method):
         att += ep-e1-eb+e0
         mp = X.T @ (wd/wd.sum()-w11/w11.sum())
         mb = X.T @ (wd/wd.sum()-w10/w10.sum())
-        # Preserve the frozen canonical influence convention, including pre loadings.
+        # Include the outcome-model influence terms for both periods.
         inf += o01 @ (X.T @ (w01/w01.sum()-w11/w11.sum()))
         inf += o00 @ (X.T @ (w00/w00.sum()-w10/w10.sum()))
         inf += eip-ei1-eib+ei0+(o11-o01) @ mp-(o10-o00) @ mb
@@ -204,7 +204,7 @@ def fit(data, y, time, unit=None, gvar=None, treatment=None, cluster=None,
     if unknown:
         raise TypeError(f"Unimplemented options: {sorted(unknown)}")
     if options.get("anticipation", 0) != 0:
-        raise NotImplementedError("nonzero anticipation is unsupported by the canonical package")
+        raise NotImplementedError("fastcsdidpy supports anticipation=0 only")
     if options.get("jackknife_method", "refit") not in ("refit", "exact"):
         raise NotImplementedError("only complete exact/refit jackknife is implemented")
     support = options.get("jackknife_support", "changing")
@@ -215,7 +215,7 @@ def fit(data, y, time, unit=None, gvar=None, treatment=None, cluster=None,
     frame = pd.DataFrame(data)
     mode = ("panel" if unit is not None and frame[unit].duplicated().any() else "rcs") if data_mode == "auto" else data_mode
     if mode == "panel":
-        raise NotImplementedError("canonical fastrcsdid is RCS-only; panel is unsupported")
+        raise NotImplementedError("fastcsdidpy supports repeated cross sections; panel data are unsupported")
     if cluster is None:
         raise ValueError("cluster is required and must have a constant treatment cohort")
     if gvar is None and treatment is None:
@@ -262,7 +262,7 @@ def fit(data, y, time, unit=None, gvar=None, treatment=None, cluster=None,
         if len(event_window) != 2 or not np.isfinite(event_window).all() or event_window[0] > event_window[1]:
             raise ValueError("event_window must be finite ordered (lower, upper)")
         if event_window[0] < 0:
-            raise NotImplementedError("pre-treatment event effects are not implemented in canonical fastrcsdid")
+            raise NotImplementedError("pre-treatment event effects are unsupported; event_window must start at zero or later")
     result = _point(d, method, control, event_window)
     result["metadata"] = dict(estimator="CSDID", method=method, common_method="dripw" if method == "dr" else method,
                               jackknife_support=support,

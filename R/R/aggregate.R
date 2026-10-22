@@ -9,7 +9,7 @@
 #' @param att_map ATT specification table.
 #' @param group_size Named treated-cohort sample sizes.
 #' @param types Requested aggregation types.
-#' @return A list with estimates, a sparse-in-spirit weight matrix, and metadata.
+#' @return A list with estimates, an aggregation weight matrix, and metadata.
 #' @export
 aggregate_att <- function(att, att_map, group_size,
                           types = c("simple", "group", "calendar", "dynamic")) {

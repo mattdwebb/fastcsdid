@@ -1,6 +1,6 @@
 # Source lineage
 
-The v1 monorepository imports distribution source from these development commits:
+The implementations originate from the following repositories and revisions:
 
 | Component | Source repository | Commit |
 |---|---|---|
@@ -8,12 +8,7 @@ The v1 monorepository imports distribution source from these development commits
 | R | mattdwebb/fastrcsdid | `21dd70ae2dbbfa8c52daf73f0673cc052bc47b43` |
 | Python | mattdwebb/fastcsdidpy | `810672235c820fcf1125653a406150eeed63a82b` |
 
-The release keeps the established estimator implementations and numerical
-fixtures, removes randomization-inference code and APIs, and reorganizes
-installation, documentation, tests, and benchmarks. Historical research scripts
-and source-repository Git histories are not included. Future work belongs in
-this repository; the old development repositories remain archival inputs.
-
-Existing frozen numerical oracle metadata live in
-`python/validation/frozen/versions.txt`. Those oracle generation versions precede
-the imported source commits; their expected numeric values have been retained.
+The frozen numerical reference outputs were generated using R, `did`, and
+`DRDID`. Their software versions and the R source revision are recorded in
+[versions.txt](python/validation/frozen/versions.txt). These describe the
+reference calculations, rather than the current package dependencies.
