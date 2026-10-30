@@ -130,9 +130,9 @@
       period <- att_map[[role]][k]
       period_index <- match(period, moments$times)
       key <- paste0(period_index, "|", paste(control_regions, collapse = ","))
-      if (!exists(key, key_to_id, inherits = FALSE)) {
+      if (!.key_cache_has(key_to_id, key)) {
         block_id <- length(definitions) + 1L
-        assign(key, block_id, key_to_id)
+        .key_cache_set(key_to_id, key, block_id)
         definitions[[block_id]] <- list(
           block_id = block_id,
           key = key,
@@ -143,7 +143,7 @@
           roles = character()
         )
       }
-      block_id <- get(key, key_to_id, inherits = FALSE)
+      block_id <- .key_cache_get(key_to_id, key)
       cell_blocks[k, paste0(role, "_block")] <- block_id
       definitions[[block_id]]$cell_ids <-
         c(definitions[[block_id]]$cell_ids, k)
