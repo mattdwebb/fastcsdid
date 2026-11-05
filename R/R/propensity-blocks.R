@@ -40,15 +40,15 @@
       moments, att_map$post[k], control_group
     )
     key <- paste(att_map$group[k], paste(controls, collapse = ","), sep = "|")
-    if (!exists(key, key_to_id, inherits = FALSE)) {
+    if (!.key_cache_has(key_to_id, key)) {
       id <- length(definitions) + 1L
-      assign(key, id, key_to_id)
+      .key_cache_set(key_to_id, key, id)
       definitions[[id]] <- list(
         master_id = id, key = key, group = att_map$group[k],
         control_regions = controls, cell_ids = integer()
       )
     }
-    id <- get(key, key_to_id, inherits = FALSE)
+    id <- .key_cache_get(key_to_id, key)
     cell_master[k] <- id
     definitions[[id]]$cell_ids <- c(definitions[[id]]$cell_ids, k)
   }
