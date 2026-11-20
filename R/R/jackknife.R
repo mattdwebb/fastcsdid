@@ -108,8 +108,11 @@
     if (is.finite(gh) && as.character(gh) %in% names(gs)) {
       gs[as.character(gh)] <- gs[as.character(gh)] - moments$region_total_weight[h]
     }
-    agg <- aggregate_att(delete_att[h, ], att_map, gs, aggregation_types)
-    out[h, ] <- agg$estimates[labels]
+    keep <- if (support=="changing") is.finite(delete_att[h, ]) & gs[as.character(att_map$group)]>0 else rep(TRUE,nrow(att_map))
+    if (any(keep)) {
+      agg <- aggregate_att(delete_att[h, keep], att_map[keep,,drop=FALSE], gs, aggregation_types)
+      out[h, ] <- agg$estimates[labels]
+    }
     removed <- gs[as.character(att_map$group)] <= 0
     for (j in seq_along(labels)) {
       needed <- is.finite(template$weights[j, ]) & template$weights[j, ] > 0

@@ -84,13 +84,19 @@ reference_group_size <- function(d, groups, weights = NULL, never_treated = 0) {
 }
 
 reference_aggregate <- function(att, att_map, group_size,
-                                types = c("simple", "group", "calendar", "dynamic")) {
+                                types = c("simple", "group", "calendar", "dynamic"),
+                                allow_partial = FALSE) {
   rows <- list()
   add <- function(label, selector, raw_weight) {
-    if (!any(selector) || anyNA(att[selector]) || sum(raw_weight) <= 0) {
+    values <- att[selector]
+    if (allow_partial) {
+      keep <- is.finite(values) & is.finite(raw_weight) & raw_weight>0
+      values <- values[keep]; raw_weight <- raw_weight[keep]
+    }
+    if (!length(values) || anyNA(values) || sum(raw_weight) <= 0) {
       value <- NA_real_
     } else {
-      value <- sum(att[selector] * raw_weight / sum(raw_weight))
+      value <- sum(values * raw_weight / sum(raw_weight))
     }
     rows[[label]] <<- value
   }
@@ -118,13 +124,13 @@ reference_aggregate <- function(att, att_map, group_size,
 }
 
 reference_fit <- function(d, att_map, control = "never", weights = NULL,
-                          never_treated = 0) {
+                          never_treated = 0, allow_partial = FALSE) {
   att <- reference_att(d, att_map, control, weights, never_treated)
   sizes <- reference_group_size(d, sort(unique(att_map$group)), weights,
                                 never_treated)
   list(
     att = att,
-    aggregate = reference_aggregate(att, att_map, sizes),
+    aggregate = reference_aggregate(att, att_map, sizes, allow_partial=allow_partial),
     group_size = sizes
   )
 }

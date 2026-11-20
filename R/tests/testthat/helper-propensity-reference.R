@@ -119,7 +119,7 @@ reference_nonlinear_att <- function(sample, method = c("ipw", "dr")) {
 reference_nonlinear_fit <- function(data, xformla, method = c("ipw", "dr"),
                                     control = c("never", "not_yet"),
                                     weights = NULL,
-                                    att_map = reference_reg_map(data)) {
+                                    att_map = reference_reg_map(data), allow_partial = FALSE) {
   method <- match.arg(method)
   control <- match.arg(control)
   prepared <- reference_nonlinear_prepare(data, xformla, weights)
@@ -133,7 +133,7 @@ reference_nonlinear_fit <- function(data, xformla, method = c("ipw", "dr"),
                                 weights)
   list(
     att = att,
-    aggregate = reference_aggregate(att, att_map, sizes),
+    aggregate = reference_aggregate(att, att_map, sizes, allow_partial=allow_partial),
     att_map = att_map
   )
 }

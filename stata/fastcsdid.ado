@@ -183,7 +183,7 @@ real colvector fcs_cell(real colvector y, real colvector P, real colvector D,
     return(att\inf)
 }
 void fcs_point(real matrix Z, string scalar method, string scalar control,
-    real scalar lo, real scalar hi, real matrix M, real matrix A, real matrix IF, real matrix CV)
+    real scalar lo, real scalar hi, real matrix M, real matrix A, real matrix IF, real matrix CV, real scalar partial)
 {
     real colvector y,t,g,c,w,groups,times,pre,post,idx,v,inf,mass,sel,raw,W,active,ids,levels
     real matrix X,I,JIF,CI
@@ -229,6 +229,10 @@ void fcs_point(real matrix Z, string scalar method, string scalar control,
             if(typ==4) sel=M[,4]:==levels[lev]
             raw=sel:*mass
             if(typ==2) raw=sel
+            if(partial) {
+                sel=sel:*(M[,5]:<.)
+                raw=raw:*(M[,5]:<.)
+            }
             active=selectindex(raw:>0)
             den=sum(raw); theta=.
             inf=J(N,1,.)
@@ -267,7 +271,7 @@ void fcs_run(string scalar vars, string scalar use, string scalar method,
         gg=select(Z[,3],Z[,4]:==ids[h])
         if(min(gg)!=max(gg)) _error(459)
     }
-    fcs_point(Z,method,control,lo,hi,M,A,IF,CV)
+    fcs_point(Z,method,control,lo,hi,M,A,IF,CV,0)
     theta=A[1,3]; v=CV[rows(M)+1,rows(M)+1]; se=sqrt(v)
     if(theta>=. | se>=.) _error(498)
     st_matrix(bn,theta); st_matrix(vn,v); st_matrix(mn,M); st_matrix(an,A)
@@ -277,7 +281,7 @@ void fcs_run(string scalar vars, string scalar use, string scalar method,
         if(G<2) _error(498)
         deleted=J(G,1,.)
         for(h=1;h<=G;h++) {
-            fcs_point(select(Z,Z[,4]:!=ids[h]),method,control,lo,hi,DM,DA,DI,DV)
+            fcs_point(select(Z,Z[,4]:!=ids[h]),method,control,lo,hi,DM,DA,DI,DV,support=="changing")
             if(support=="fixed") {
                 if(rows(DM)!=rows(M)) _error(498)
                 if(any(DM[,1..4]:!=M[,1..4])) _error(498)
@@ -298,7 +302,7 @@ real colvector fcs_delete(real matrix Z,string scalar method,string scalar contr
     real scalar h
     ids=uniqrows(sort(Z[,4],1)); deleted=J(rows(ids),1,.)
     for(h=1;h<=rows(ids);h++) {
-        fcs_point(select(Z,Z[,4]:!=ids[h]),method,control,lo,hi,DM,DA,DI,DV)
+        fcs_point(select(Z,Z[,4]:!=ids[h]),method,control,lo,hi,DM,DA,DI,DV,support=="changing")
         if(support=="fixed") {
             if(rows(DM)!=rows(M)) _error(498)
             if(any(DM[,1..4]:!=M[,1..4])) _error(498)

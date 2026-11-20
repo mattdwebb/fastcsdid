@@ -16,16 +16,16 @@ for (weighted=0;weighted<=1;weighted++) {
   if(!weighted) Z[,5]=J(rows(Z),1,1)
   for (ci=1;ci<=2;ci++) {
     control=ci==1 ? "never" : "not_yet"
-    fcs_point(Z,"dr",control,0,.,M,A,IF,CV)
+    fcs_point(Z,"dr",control,0,.,M,A,IF,CV,0)
     reference=CV
     D=J(rows(ids),rows(M)+rows(A),.)
     for(h=1;h<=rows(ids);h++) {
       saved=Z[,5]
       Z[,5]=saved:*(1:+step:*(Z[,4]:==ids[h]))
-      fcs_point(Z,"dr",control,0,.,M,A,IF,CV)
+      fcs_point(Z,"dr",control,0,.,M,A,IF,CV,0)
       upper=M[,5]\A[,3]
       Z[,5]=saved:*(1:-step:*(Z[,4]:==ids[h]))
-      fcs_point(Z,"dr",control,0,.,M,A,IF,CV)
+      fcs_point(Z,"dr",control,0,.,M,A,IF,CV,0)
       lower=M[,5]\A[,3]
       Z[,5]=saved
       D[h,]=(upper-lower)'/(2*step)

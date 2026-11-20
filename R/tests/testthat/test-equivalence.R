@@ -14,7 +14,7 @@ test_that("all ATT and aggregate deletions match an independent physical referen
                 control, "full aggregate"))
             for (h in unique(d$region)) {
                 deleted_data <- d[d$region != h, , drop = FALSE]
-                deleted_reference <- reference_fit(deleted_data, fit$att_map, control)
+                deleted_reference <- reference_fit(deleted_data, fit$att_map, control, allow_partial=TRUE)
                 expect_equal(fit$jackknife$att[as.character(h), ], deleted_reference$att, tolerance = 1e-12,
                   info = paste(design_name, control, "ATT deletion", h))
                 expect_equal(fit$jackknife$aggregate[as.character(h), ], deleted_reference$aggregate,

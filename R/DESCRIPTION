@@ -2,7 +2,7 @@ Package: fastrcsdid
 Type: Package
 Title: Fast CSDID for Repeated Cross Sections
 Version: 1.0.1
-Authors@R: person("Matthew", "Webb", role = c("aut", "cre"), email = "matt.webb@carleton.ca")
+Authors@R: person("Matthew D.", "Webb", role = c("aut", "cre"), email = "matt.webb@carleton.ca")
 Description: Group-time difference-in-differences for stationary repeated
     cross sections. Provides no-covariate, outcome-regression,
     inverse-probability-weighted, and locally efficient doubly robust estimators,
@@ -18,13 +18,11 @@ Depends:
     R (>= 4.1.0)
 Suggests:
     did (>= 2.5.1),
-    DRDID (>= 1.3.0),
+    DRDID (>= 1.4.0),
     knitr,
     peakRAM,
     rmarkdown,
     testthat (>= 3.0.0)
-Remotes:
-    DRDID@1.3.0
 LazyData: true
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.0.0

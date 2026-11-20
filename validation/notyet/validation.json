@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "control_group": "not_yet",
+  "method": "DRIPW",
+  "n_observations": 1152,
+  "n_clusters": 12,
+  "max_estimate_gap": 6.760147996942578e-12,
+  "max_native_se_gap": 3.0513507415230734e-09,
+  "engines": [
+    "fast_R",
+    "DRDID",
+    "official_Stata",
+    "fast_Stata",
+    "fast_Python"
+  ]
+}

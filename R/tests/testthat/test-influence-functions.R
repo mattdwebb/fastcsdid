@@ -1,10 +1,12 @@
-test_that("non-DR observation ATT influence functions match did after alignment", {
+test_that("observation ATT influence functions including DR match did after alignment", {
   skip_if_not_installed("did", minimum_version = "2.5.1")
+  skip_if_not_installed("DRDID", minimum_version = "1.4.1")
   data <- make_nonlinear_fixture(H = 20L, observations_per_cell = 8L)
   specifications <- list(
     none = list(local = "none", external = "reg", formula = ~1),
     reg = list(local = "reg", external = "reg", formula = ~x1 + female),
-    ipw = list(local = "ipw", external = "ipw", formula = ~x1 + female)
+    ipw = list(local = "ipw", external = "ipw", formula = ~x1 + female),
+    dr = list(local = "dr", external = "dr", formula = ~x1 + female)
   )
   for (name in names(specifications)) {
     specification <- specifications[[name]]

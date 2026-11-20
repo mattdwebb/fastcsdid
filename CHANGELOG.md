@@ -25,3 +25,5 @@
   cohort, calendar, and event-time aggregations.
 - Reproducible timings against official Stata csdid 2.0.0.
 - Scale-aware logit line searches in Python and Stata for large samples.
+
+DRDID 1.4.0 and 1.4.1 include the corresponding upstream sign correction. Historical references to 1.3.0 do not apply to those versions. Both exact-refit and R linearized deletion estimates are unchanged.

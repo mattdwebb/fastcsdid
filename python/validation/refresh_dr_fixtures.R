@@ -2,6 +2,7 @@
 # assignment fixtures are retained and checked, not silently overwritten.
 args <- commandArgs(TRUE)
 stopifnot(length(args) == 1L)
+stopifnot(packageVersion("DRDID") >= package_version("1.4.1"))
 for (path in list.files(file.path(args[1], "R"), full.names=TRUE)) source(path)
 out <- "validation/frozen"
 d <- read.csv(file.path(out, "fixture.csv"))
@@ -55,8 +56,8 @@ for (stem in c("randomized","stratified_randomized")) {
   write.csv(records,file,row.names=FALSE)
 }
 writeLines(c(paste("R",getRversion()),paste("DRDID",packageVersion("DRDID")),
- "Refreshed 2026-11-19: corrected pre-period DR outcome-regression influence.",
- "DRDID 1.3.0 DR point estimates remain comparators; its DR influence is historical, not the corrected oracle.",
+ "Refreshed 2026-11-20: corrected pre-period DR outcome-regression influence.",
+ "DRDID >=1.4.1 verifies all point estimates and all influence functions, including DR.",
  "Independent checks: empirical cluster-weight finite differences and official Stata csdid 2.0.3.",
  paste("R/influence.R MD5",tools::md5sum(file.path(args[1],"R/influence.R")))),file.path(out,"versions.txt"))
 cat("DR_FIXTURES_REFRESHED_POINTS_DELETIONS_UNCHANGED\n")

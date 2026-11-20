@@ -112,7 +112,7 @@ def _cell(y, P, D, X, w, method):
     return att, inf
 
 
-def _point(d, method, control, window):
+def _point(d, method, control, window, *, allow_partial=False):
     N = len(d)
     times = np.sort(d.t.unique())
     groups = np.sort(d.loc[np.isfinite(d.g), "g"].unique())
@@ -156,6 +156,8 @@ def _point(d, method, control, window):
         selectors.extend((kind, z, (cells[col] == z).to_numpy()) for z in sorted(cells[col].unique()))
     for kind, index, sel in selectors:
         raw = np.where(sel, 1 if kind == "group" else mass, 0.)
+        if allow_partial:
+            raw = np.where(np.isfinite(cells.estimate), raw, 0.)
         active = raw > 0
         valid = active.any() and np.isfinite(cells.estimate[active]).all()
         W = raw/raw.sum() if valid else np.full(len(cells), np.nan)

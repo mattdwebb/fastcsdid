@@ -14,8 +14,9 @@ def _jackknife(d, method, control, window, full, null, support="changing"):
     for h in ids:
         changed = None
         try:
-            deleted = _point(d.loc[d.c != h], method, control, window)
-            changed = not np.array_equal(deleted["group_time"][columns].to_numpy(), full["group_time"][columns].to_numpy())
+            deleted = _point(d.loc[d.c != h], method, control, window, allow_partial=support == "changing")
+            retained = deleted["group_time"].loc[np.isfinite(deleted["group_time"].estimate), columns]
+            changed = not np.array_equal(retained.to_numpy(), full["group_time"][columns].to_numpy())
             if support == "fixed" and changed:
                 raise IdentificationError("deletion changed required ATT support under fixed policy")
             if deleted["status"] != "pass" or not np.isfinite(deleted["estimate"]):

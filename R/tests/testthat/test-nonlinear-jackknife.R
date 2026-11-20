@@ -25,7 +25,7 @@ test_that("sparse exact nonlinear refits match physical deletion", {
           deleted <- data[data$region != cluster, , drop = FALSE]
           expected <- reference_nonlinear_fit(
             deleted, ~x1 + female, method, control, weights,
-            att_map = fit$att_map
+            att_map = fit$att_map, allow_partial=TRUE
           )
           expect_equal(
             fit$jackknife$att[as.character(cluster), ], expected$att,

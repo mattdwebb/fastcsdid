@@ -1,4 +1,5 @@
 v 3
+d Author: Matthew D. Webb
 d fastcsdid: repeated-cross-section group-time difference-in-differences
 d Version 1.0.1; Matthew D. Webb; MIT license
 d Requires Stata 16 or newer

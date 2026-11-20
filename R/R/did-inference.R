@@ -36,7 +36,7 @@ did_point <- function(design, assignment=NULL, engine=c("fast","reference")) {
 
 did_jackknife <- function(design,assignment=NULL,null=0,engine=c("fast","reference")) {
   engine <- match.arg(engine);a <- .did_assignment(design,assignment);G <- length(a)
-  if(G<3) .did_abort("insufficient_clusters")
+  if(G<2) .did_abort("insufficient_clusters")
   estimate <- did_point(design,a,engine);m <- design$moments;m$assignment <- a
   map <- compile_att_map(m);v <- evaluate_assignment(m,att_map=map)
   if(engine=="fast") {
@@ -44,15 +44,18 @@ did_jackknife <- function(design,assignment=NULL,null=0,engine=c("fast","referen
     # Native simple ATT weights are cohort total sample weights, re-estimated after deletion.
     weights <- matrix(v$group_size[as.character(map$group)],G,nrow(map),byrow=TRUE)
     for(h in seq_len(G)) weights[h,map$group==a[h]] <- weights[h,map$group==a[h]]-m$region_total_weight[h]
+    valid <- is.finite(deleted) & is.finite(weights) & weights>0
+    weights[!valid] <- 0
+    deleted[!valid] <- 0
     theta <- rowSums(deleted*weights)/rowSums(weights)
   } else {
     theta <- vapply(seq_len(G),function(h) {
       d <- design$data[design$data[[design$cluster]]!=m$regions[h],,drop=FALSE]
       d[[design$timing]] <- a[match(d[[design$cluster]],m$regions)]
-      if(is.finite(a[h])&&sum(a==a[h])==1) return(NA_real_)
-      if(!any(is.infinite(a[-h]))) return(NA_real_)
-      dd <- did_design(d,design$outcome,design$cluster,design$time,design$timing)
-      did_point(dd,engine="reference")
+      tryCatch({
+        dd <- did_design(d,design$outcome,design$cluster,design$time,design$timing)
+        did_point(dd,engine="reference")
+      }, error=function(e) NA_real_)
     },numeric(1))
   }
   names(theta) <- as.character(m$regions)
