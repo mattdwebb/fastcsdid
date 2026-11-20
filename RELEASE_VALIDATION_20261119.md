@@ -110,7 +110,7 @@ not modified. Canonical dirty working trees were preserved; release work was iso
 
 
 
-Public candidate: **69 Python tests** and the complete R suite (**1779 expectations**) passed. R source build and `R CMD check --no-manual --no-vignettes` reported **Status: OK**. Stata passed all 16 frozen cases, independent derivative checks, MERIT51-deletion and public-API tests. Python and R README examples were executed. The public API source audit confirms that private inference extensions were not added.
+Public candidate: **69 Python tests** and the complete R suite (**1779 expectations**) passed. R source build and `R CMD check --no-manual --no-vignettes` reported **Status: OK**. Stata passed all 16 frozen cases, independent derivative checks, MERIT51-deletion and public-API tests. Python and R README examples were executed. The public API source audit confirms that unsupported inference extensions were not added.
 
 
 

@@ -1,6 +1,6 @@
 test_that("observation ATT influence functions including DR match did after alignment", {
   skip_if_not_installed("did", minimum_version = "2.5.1")
-  skip_if_not_installed("DRDID", minimum_version = "1.4.1")
+  skip_if_not_installed("DRDID", minimum_version = "1.4.0")
   data <- make_nonlinear_fixture(H = 20L, observations_per_cell = 8L)
   specifications <- list(
     none = list(local = "none", external = "reg", formula = ~1),
