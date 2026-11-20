@@ -1,3 +1,14 @@
+> These are historical timings for the recorded 1.0.0/official 2.0.0 sources.
+> Their DR analytical-SE agreement is not a correctness check against
+> corrected official 2.0.3 inference. The 1.0.1 correction and current
+> numerical checks are in the repository release-validation report;
+> no new speedup is asserted from these old timings.
+
+> DR analytical-inference update (19 November 2026): comparisons below with
+> historical DRDID/did or Stata CSDID 2.0.0 do not validate the corrected
+> pre-period DR influence. Point estimates and exact-refit jackknife
+> estimates are unaffected. See [current validation](../../RELEASE_VALIDATION_20261119.md).
+
 # Native inference timings
 
 Measured on 2026-10-20. Medians of three repetitions after one recorded warm-up.

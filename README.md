@@ -1,85 +1,86 @@
-# fastcsdid
+# Fast CSDID
 
-Fast group-time difference-in-differences for **stationary repeated cross
-sections**, with Stata, R, and Python implementations in one repository.
-Version 1.0.0 provides unadjusted, outcome-regression, inverse-probability-weighted,
-and doubly robust estimation, analytical cluster inference, and ordinary
-delete-one-cluster jackknife inference.
+**Estimate policy effects when different states adopt in different years.**
 
-| Implementation | Directory | Package/command | Requirement |
-|---|---|---|---|
-| Stata | [stata](stata) | `fastcsdid` | Stata 16+ |
-| R | [R](R) | `fastrcsdid` | R 4.1+ |
-| Python | [python](python) | `fastcsdidpy` | Python 3.10+, NumPy, pandas |
+Suppose several states introduce merit scholarships in different years. You
+want to estimate how college enrollment changes after adoption, using states
+that have not adopted as a comparison group. Fast CSDID computes an effect for
+each adoption cohort and year, then combines those effects into an overall
+average treatment effect on the treated (ATT).
 
-Each implementation runs independently; install the package for your preferred
-language.
+The package implements stationary repeated-cross-section equations. It does not
+require following the same individuals over time. The validity of the comparison
+still depends on the study's identifying assumptions, including appropriate
+parallel trends; running the command does not establish those assumptions.
 
-## Install
+## Choose your language
 
-```stata
-net install fastcsdid, from("https://raw.githubusercontent.com/mattdwebb/fastcsdid/main/stata") replace
-```
+Each implementation runs independently. The guides use the same merit-scholarship
+data and explain the resulting estimates and standard errors.
+
+| Language | Start here | Requirements |
+|---|---|---|
+| Stata | [Commands, example and output](stata/README.md) | Stata 16+ |
+| R | [Installation and worked example](R/README.md) | R 4.1+; base R estimation |
+| Python | [Installation and worked example](python/README.md) | Python 3.10+, NumPy, pandas |
+
+## What do the results look like?
+
+The bundled example uses college-enrollment shares and merit-scholarship adoption
+in 51 jurisdictions during 1989–2000. The unadjusted simple ATT is **0.047782**,
+or **4.78 percentage points**, with a delete-state jackknife SE of **0.014617**,
+or **1.46 percentage points**. All three language guides reproduce these numbers.
+The jackknife refits after each state is removed; it does not treat 612 state-year
+rows as 612 independent clusters.
+
+For example, after installing the R package:
 
 ```r
-remotes::install_github("mattdwebb/fastcsdid", subdir = "R")
+library(fastrcsdid)
+d <- read.csv(system.file("extdata", "merit.csv", package="fastrcsdid"))
+fit <- fast_csdid(d, "outcome", "year", "cohort", "state",
+                  weights="weight", est_method="none", inference="jackknife")
+fit$aggregation$estimates["simple"]
+fit$jackknife$aggregate_covariance$se_cv3j["simple"]
 ```
 
-```sh
-python -m pip install "git+https://github.com/mattdwebb/fastcsdid.git#subdirectory=python"
-```
+The [language guides](#choose-your-language) give installation commands, explain
+the data columns, show adjusted examples, and identify the returned results.
 
-For reproducible analyses, replace `main` in the Stata URL, or append `@COMMIT`
-to the GitHub repository reference in R/Python, with a recorded commit SHA.
-Local installation: `R CMD INSTALL R` or `python -m pip install ./python`.
+## Scope
 
-## Scope and inference
+Fast CSDID provides unadjusted, outcome-regression, IPW and doubly robust
+estimation for stationary repeated cross sections. It reports cohort-time effects,
+four aggregation families, analytical clustered inference, and ordinary
+delete-cluster jackknife inference. It does not implement the panel equations or
+every option of the official CSDID packages.
 
-Treatment is absorbing and assigned at the cluster/jurisdiction level; each
-cluster has one adoption cohort. Zero denotes never treated. Covariates are
-contemporaneous repeated-cross-section covariates, not frozen panel baselines.
-Never-treated and not-yet-treated control groups are supported. The common
-outputs are post-treatment ATT(g,t) and simple, cohort, calendar, and event-time
-aggregations.
+R uses exact moment updates for linear estimators. Its nonlinear jackknife offers
+both linearized and exact-refit calculations; request `jackknife_method="refit"`
+for an exact comparison with Stata or Python. Performance depends on the estimator,
+sample and inference requested; [benchmark reports](benchmarks/README.md) state
+those choices explicitly.
 
-Analytical standard errors use cluster-summed influence functions. The cluster
-jackknife deletes one cluster at a time. Stata and Python completely refit each
-deletion. R uses exact moment updates for linear estimators and offers both
-linearized and exact-refit nonlinear jackknife paths; choose
-`jackknife_method = "refit"` for an exact cross-language comparison.
+## Correction and validation
 
-These implementations are RCS estimators. They do not implement panel-specific
-equations, pre-treatment event-study estimation, anticipation, or all features
-of the official `csdid`/`did` packages. See the
-[timing results](benchmarks/results/TIMINGS.md) for performance across languages,
-methods, and sample sizes.
+The 1.0.1 candidate corrects the pre-period outcome-regression contribution to
+DR analytical inference in all three languages. Point estimates and exact
+jackknife estimates are unchanged. Recompute DR analytical standard errors made
+with 1.0.0. The correction is checked against independent weight derivatives and
+official Stata CSDID 2.0.3; see [validation](VALIDATION.md) and
+[change history](CHANGELOG.md). This candidate has not created a new release tag.
 
-## Examples and validation
+## Methods, help, and license
 
-See the language READMEs for executable examples and return values.
-[VALIDATION.md](VALIDATION.md) describes the checks and limitations.
-[benchmarks/README.md](benchmarks/README.md) documents the timing design and
-the pinned official Stata `csdid` comparator. Benchmark data are synthetic.
+- Callaway and Sant'Anna (2021), [Difference-in-Differences with Multiple Time
+  Periods](https://doi.org/10.1016/j.jeconom.2020.12.001).
+- Sant'Anna and Zhao (2020), [Doubly Robust Difference-in-Differences
+  Estimators](https://doi.org/10.1016/j.jeconom.2020.06.003).
+- Karim, Nielsen, MacKinnon, and Webb (2026), [Improved Inference for CSDID
+  Using the Cluster Jackknife](https://arxiv.org/abs/2602.12043).
 
-The MERIT example fixture is a state-year collapse from Conley and Taber
-(2011), also used in the UNDID paper. Its public source is
-<https://economics.uwo.ca/people/conley_docs/code_to_download.html>.
-It is included for regression testing; see the language tests for its expected
-estimate and jackknife uncertainty.
+Developed by Matthew D. Webb. MIT licensed; see the repository's license and
+provenance files. Numerical checks and known scope are documented in
+`VALIDATION.md`; development history is separate from this introductory guide.
 
-## References and license
-
-Callaway, B. and P. H. C. Sant'Anna (2021), “Difference-in-Differences with
-Multiple Time Periods,” *Journal of Econometrics*, 225(2), 200–230.
-<https://doi.org/10.1016/j.jeconom.2020.12.001>.
-
-Karim, S. R., M. Ø. Nielsen, J. G. MacKinnon, and M. D. Webb (2026),
-“Improved Inference for CSDID Using the Cluster Jackknife,” arXiv:2602.12043.
-<https://arxiv.org/abs/2602.12043>.
-
-Sant'Anna, P. H. C. and J. Zhao (2020), “Doubly Robust Difference-in-Differences
-Estimators,” *Journal of Econometrics*, 219(1), 101–122.
-<https://doi.org/10.1016/j.jeconom.2020.06.003>.
-
-MIT; see [LICENSE](LICENSE). Developed by Matthew D. Webb.
-Source lineage is recorded in [PROVENANCE.md](PROVENANCE.md).
+[Source provenance](PROVENANCE.md) records the implementation lineage.

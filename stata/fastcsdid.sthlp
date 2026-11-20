@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.0.0 20oct2026}{...}
+{* *! version 1.0.1 19nov2026}{...}
 {title:fastcsdid — Group-time DiD for stationary repeated cross sections}
 
 {title:Syntax}

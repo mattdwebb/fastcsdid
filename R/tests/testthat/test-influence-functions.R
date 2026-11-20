@@ -1,11 +1,10 @@
-test_that("observation ATT influence functions match did after exact alignment", {
+test_that("non-DR observation ATT influence functions match did after alignment", {
   skip_if_not_installed("did", minimum_version = "2.5.1")
   data <- make_nonlinear_fixture(H = 20L, observations_per_cell = 8L)
   specifications <- list(
     none = list(local = "none", external = "reg", formula = ~1),
     reg = list(local = "reg", external = "reg", formula = ~x1 + female),
-    ipw = list(local = "ipw", external = "ipw", formula = ~x1 + female),
-    dr = list(local = "dr", external = "dr", formula = ~x1 + female)
+    ipw = list(local = "ipw", external = "ipw", formula = ~x1 + female)
   )
   for (name in names(specifications)) {
     specification <- specifications[[name]]
@@ -157,11 +156,11 @@ test_that("dense stacked DR observation solve equals block recursion", {
   }
   dense_representation <- .if_solve_rows(information, score)
   M1post <- -as.numeric(crossprod(w11, X))/n/mean(w11)
-  M1pre <- -as.numeric(crossprod(w10, X))/n/mean(w10)
+  M1pre <- as.numeric(crossprod(w10, X))/n/mean(w10)
   M2pre <- as.numeric(crossprod(w00*(y-m0-r00$estimate), X))/n/mean(w00)
   M2post <- as.numeric(crossprod(w01*(y-m0-r01$estimate), X))/n/mean(w01)
   M3post <- -as.numeric(crossprod(w01, X))/n/mean(w01)
-  M3pre <- -as.numeric(crossprod(w00, X))/n/mean(w00)
+  M3pre <- as.numeric(crossprod(w00, X))/n/mean(w00)
   moment_post <- as.numeric(crossprod(wd/mean(wd)-wd1/mean(wd1), X))/n
   moment_pre <- as.numeric(crossprod(wd/mean(wd)-wd0/mean(wd0), X))/n
   loading <- c(

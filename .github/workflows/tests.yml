@@ -36,4 +36,4 @@ jobs:
           pkgload::load_all("R")
           testthat::test_dir("R/tests/testthat", stop_on_failure = TRUE)
       - run: R CMD build R
-      - run: R CMD check --no-manual fastrcsdid_1.0.0.tar.gz
+      - run: R CMD check --no-manual fastrcsdid_1.0.1.tar.gz

@@ -32,11 +32,13 @@ def test_frozen_r(data, method, control, weighted):
     np.testing.assert_allclose(influence_function(r, cluster_sum=True).sum(axis=0), 0, atol=1e-9)
 
 
-def test_official_drdid():
+def test_official_drdid_point_and_non_dr_influence():
     checks = pd.read_csv(ROOT / "external_drdid.csv")
     assert len(checks) == 48
     assert checks.att_gap.max() < 2e-8
-    assert checks.if_gap.max() < 2e-7
+    # DRDID 1.3.0 has the historical pre-period DR IF sign; DR is instead
+    # checked by empirical-weight derivatives and current official Stata.
+    assert checks.loc[~checks["case"].str.startswith("dr_"), "if_gap"].max() < 2e-7
 
 
 def test_validation_and_modes(data):

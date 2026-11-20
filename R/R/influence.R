@@ -162,7 +162,8 @@
   propensity <- .if_propensity_representation(X, D, weight, probability)
 
   M1_post <- -as.numeric(crossprod(w11, X)) / n / mean(w11)
-  M1_pre <- -as.numeric(crossprod(w10, X)) / n / mean(w10)
+  # Subtracting the pre-period residual gives a positive beta_00 loading.
+  M1_pre <- as.numeric(crossprod(w10, X)) / n / mean(w10)
   treated_or <- as.numeric(ols01 %*% M1_post) +
     as.numeric(ols00 %*% M1_pre)
 
@@ -174,7 +175,7 @@
   )) / n / mean(w01)
   control_ps <- as.numeric(propensity %*% (M2_post - M2_pre))
   M3_post <- -as.numeric(crossprod(w01, X)) / n / mean(w01)
-  M3_pre <- -as.numeric(crossprod(w00, X)) / n / mean(w00)
+  M3_pre <- as.numeric(crossprod(w00, X)) / n / mean(w00)
   control_or <- as.numeric(ols01 %*% M3_post) +
     as.numeric(ols00 %*% M3_pre)
 
