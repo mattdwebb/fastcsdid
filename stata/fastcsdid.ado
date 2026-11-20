@@ -1,4 +1,4 @@
-*! fastcsdid 1.0.0 20oct2026 MIT; Matt Webb
+*! fastcsdid 1.0.1 19nov2026 MIT; Matt Webb
 program define fastcsdid, eclass
     version 16.0
     syntax varname(numeric) [if] [in], Time(varname numeric) Gvar(varname numeric) ///
@@ -175,7 +175,8 @@ real colvector fcs_cell(real colvector y, real colvector P, real colvector D,
         att=att+fcs_ratio(wd,m11-m01)-fcs_ratio(w11,m11-m01)-fcs_ratio(wd,m10-m00)+fcs_ratio(w10,m10-m00)
         mp=X'*(wd/sum(wd)-w11/sum(w11))
         mb=X'*(wd/sum(wd)-w10/sum(w10))
-        inf=inf+o01*(X'*(w01/sum(w01)-w11/sum(w11)))+o00*(X'*(w00/sum(w00)-w10/sum(w10))) +
+        // beta_00 loading is treated-pre minus weighted-control-pre.
+        inf=inf+o01*(X'*(w01/sum(w01)-w11/sum(w11)))+o00*(X'*(w10/sum(w10)-w00/sum(w00))) +
             fcs_rif(wd,m11-m01)-fcs_rif(w11,m11-m01)-fcs_rif(wd,m10-m00)+fcs_rif(w10,m10-m00) +
             (o11-o01)*mp-(o10-o00)*mb
     }

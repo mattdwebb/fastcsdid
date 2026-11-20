@@ -3,6 +3,6 @@ bibentry(
   title = "fastrcsdid: Fast CSDID for Repeated Cross Sections",
   author = person("Matthew", "Webb"),
   year = "2026",
-  note = "R package version 1.0.0",
+  note = "R package version 1.0.1",
   url = "https://github.com/mattdwebb/fastcsdid"
 )

@@ -1,3 +1,8 @@
+> DR analytical-inference update (19 November 2026): comparisons below with
+> historical DRDID/did or Stata CSDID 2.0.0 do not validate the corrected
+> pre-period DR influence. Point estimates and exact-refit jackknife
+> estimates are unaffected. See [current validation](RELEASE_VALIDATION_20261119.md).
+
 # Source lineage
 
 The implementations originate from the following repositories and revisions:

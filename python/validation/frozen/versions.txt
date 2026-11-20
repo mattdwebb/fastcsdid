@@ -1,4 +1,6 @@
 R 4.5.3
 DRDID 1.3.0
-did 2.5.1
-fastrcsdid source revision 6926d86ff29f9857864a8a120a8f92af40b02a87
+Refreshed 2026-11-19: corrected pre-period DR outcome-regression influence.
+DRDID 1.3.0 DR point estimates remain comparators; its DR influence is historical, not the corrected oracle.
+Independent checks: empirical cluster-weight finite differences and official Stata csdid 2.0.3.
+R/influence.R MD5 fa5db22b058abaef20a30e809542dec1

@@ -1,3 +1,8 @@
+Current release checks and the DR analytical-inference correction are documented
+in [RELEASE_VALIDATION_20261119.md](RELEASE_VALIDATION_20261119.md). Earlier
+DR influence-equivalence statements below describe their recorded historical
+versions and do not validate the old sign against current CSDID.
+
 # Version 1 validation
 
 Version 1.0.0 was validated on 2026-10-20 against frozen numerical references

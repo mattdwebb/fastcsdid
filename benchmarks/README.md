@@ -1,3 +1,9 @@
+> These are historical timings for the recorded 1.0.0/official 2.0.0 sources.
+> Their DR analytical-SE agreement is not a correctness check against
+> corrected official 2.0.3 inference. The 1.0.1 correction and current
+> numerical checks are in the repository release-validation report;
+> no new speedup is asserted from these old timings.
+
 # Timing fastcsdid against Stata csdid 2.0.0
 
 The comparator is **csdid 2.0.0**, distributed 2026-09-27, from

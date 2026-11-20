@@ -104,9 +104,10 @@ def _cell(y, P, D, X, w, method):
         att += ep-e1-eb+e0
         mp = X.T @ (wd/wd.sum()-w11/w11.sum())
         mb = X.T @ (wd/wd.sum()-w10/w10.sum())
-        # Include the outcome-model influence terms for both periods.
+        # The residual contrast subtracts the treated pre mean and adds the
+        # weighted control pre mean: its beta_00 derivative is Tpre-Cpre.
         inf += o01 @ (X.T @ (w01/w01.sum()-w11/w11.sum()))
-        inf += o00 @ (X.T @ (w00/w00.sum()-w10/w10.sum()))
+        inf += o00 @ (X.T @ (w10/w10.sum()-w00/w00.sum()))
         inf += eip-ei1-eib+ei0+(o11-o01) @ mp-(o10-o00) @ mb
     return att, inf
 
