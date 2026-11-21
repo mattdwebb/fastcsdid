@@ -63,12 +63,12 @@ those choices explicitly.
 
 ## Correction and validation
 
-The 1.0.1 candidate corrects the pre-period outcome-regression contribution to
+Release 1.0.1 corrects the pre-period outcome-regression contribution to
 DR analytical inference in all three languages. Point estimates and exact
 jackknife estimates are unchanged. Recompute DR analytical standard errors made
 with 1.0.0. The correction is checked against independent weight derivatives and
 official Stata CSDID 2.0.3; see [validation](VALIDATION.md) and
-[change history](CHANGELOG.md). This candidate has not created a new release tag.
+[change history](CHANGELOG.md). The published [v1.0.1 release](https://github.com/mattdwebb/fastcsdid/releases/tag/v1.0.1) is tagged at `bf4a7ad`.
 
 ## Methods, help, and license
 

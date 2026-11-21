@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.1 candidate — 2026-11-19
+## 1.0.1 — released 2026-11-20
 
 - Correct the pre-period outcome-regression contribution to repeated-cross-section
   doubly robust analytical influence functions in Stata, R and Python. Point
@@ -13,7 +13,8 @@
   DR influence is no longer the correctness oracle. Retain point/deletion fixtures.
 - Replace developer-first landing pages with installation, runnable MERIT examples,
   actual results, plain-language interpretation, and explicit supported scope.
-- Bump package metadata and CI build filename consistently; no release tag created.
+- Bump package metadata and CI build filename consistently. The immutable
+  annotated tag `v1.0.1` points to commit `bf4a7ad`; the GitHub Release is Latest.
 
 ## 1.0.0 — 2026-10-20
 
