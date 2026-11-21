@@ -4,7 +4,7 @@
   "DRDID_version": "1.4.1",
   "DRDID_source": "https://cran.r-project.org/package=DRDID",
   "seed": 20261120,
-  "data_sha256": "d94d9b77557bc078bcac24b53738679d212e9c154b1c13b72e54bee9a2439ced",
+  "data_sha256": "76791831e0510d3492f94e1d4a62c60b25edbc16bfdf9376dae66675401923c8",
   "official_files": {
     "csdid.ado": "64eba0160836f606da87ae8a3cdf92a711c3c1be1a5b6aa95d130ce3a2eb06d1",
     "csdid.mata": "b5005788eff6279e50469e1e220d0a53942f2dc8b5bab5456d454a19f047ccb2",
